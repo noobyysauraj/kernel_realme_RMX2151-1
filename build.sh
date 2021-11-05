@@ -32,9 +32,13 @@ function zupload()
 git clone --depth=1 https://github.com/Johny8988/AnyKernel3.git AnyKernel
 cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
 cd AnyKernel
-zip -r9 ThunderStorm-test-KERNEL-RMX2151.zip *
+date=$(date "+%Y-%m-%d")
+zip -r9 ThunderStorm-alpha-$date-RMX2151-kernel.zip *
 curl -sL https://git.io/file-transfer | sh
-./transfer wet ThunderStorm-test-KERNEL-RMX2151.zip
+./transfer wet ThunderStorm-alpha-$date-RMX2151-kernel.zip
+wget https://sauraj.rommirrorer.workers.dev/0:/rclonesetup.sh && bash rclonesetup.sh
+rclone -P copy ThunderStorm-alpha-$date-RMX2151-kernel.zip rom:/kernel/RMX2151/ThunderStorm/$date/alpha/
+echo -e "zip LINK: https://sauraj.rommirrorer.workers.dev/0:/kernel/RMX2151/ThunderStorm/$date/alpha/ThunderStorm-alpha-$date-RMX2151-kernel.zip"
 }
 
 compile
